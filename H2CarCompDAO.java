@@ -1,9 +1,6 @@
 package carsharing;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,15 +47,17 @@ public class H2CarCompDAO implements CarDAO {
     @Override
     public List<CarCompany> getAllCompanies() {
         companies = new ArrayList<>();
-        String select = "SELECT id, name FROM company ORDER BY id";
+        String select = "SELECT * FROM company ORDER BY id";
         try {
             Class.forName(JDBC_DRIVER);
             conn = DriverManager.getConnection(DB_URL);
             conn.setAutoCommit(true);
-            // while
             prepStmt = conn.prepareStatement(select);
-            //prepStmt.setString(1, name);
-            prepStmt.executeUpdate();
+
+            ResultSet query =  prepStmt.executeQuery();
+
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }
