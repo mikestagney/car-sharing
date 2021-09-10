@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    static final String JDBC_DRIVER = "org.h2.Driver";
-    static String DB_URL = "jdbc:h2:./src/carsharing/db/";   //  "jdbc:h2:file:../task/src/carsharing/db/"
     static CarDAO dao;
     static Scanner input;
 
@@ -50,9 +48,7 @@ public class Main {
                     listAllCompanies();
                     break;
                 case ('2'):
-                    System.out.println("Enter the company name:");
-                    choice = input.nextLine();
-                    dao.addCompany(choice);
+                    addCarCompany();
                     break;
                 case ('0'):
                     return;
@@ -68,11 +64,18 @@ public class Main {
         if (companies.isEmpty()) {
             System.out.println("The company list is empty!");
         } else {
+            System.out.println("Company list:");
             for (int i = 0; i < companies.size(); i++) {
                 System.out.printf("%d. %s \n", i + 1, companies.get(i).getName());
             }
         }
+        System.out.println();
     }
-
-
+    public static void addCarCompany() {
+        System.out.println("Enter the company name:");
+        String choice = input.nextLine();
+        dao.addCompany(choice);
+        System.out.println("The company was created!");
+        System.out.println();
+    }
 }
