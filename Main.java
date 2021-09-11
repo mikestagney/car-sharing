@@ -65,9 +65,7 @@ public class Main {
             System.out.println("The company list is empty!");
         } else {
             System.out.println("Company list:");
-            for (int i = 0; i < companies.size(); i++) {
-                System.out.printf("%d. %s \n", i + 1, companies.get(i).getName());
-            }
+            companies.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
         }
         System.out.println();
     }
