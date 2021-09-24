@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class Main {
     static CarDAO dao;
     static Scanner input;
+    static CarCompany company;
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
@@ -64,10 +65,16 @@ public class Main {
         if (companies.isEmpty()) {
             System.out.println("The company list is empty!");
         } else {
-            System.out.println("Company list:");
+            System.out.println("Choose the Company:");
             companies.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
         }
+        int selection = Integer.parseInt(input.nextLine());
+        company = companies.get(selection - 1);
+
+
         System.out.println();
+
+
     }
     public static void addCarCompany() {
         System.out.println("Enter the company name:");

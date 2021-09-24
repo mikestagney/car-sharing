@@ -34,7 +34,7 @@ public class H2CarCompDAO implements CarDAO {
     public void addCompany(String name) {
         String insert = "INSERT INTO company (name) VALUES (?)";
         try {
-            conn = DriverManager.getConnection(DB_URL);
+            //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
             prepStmt.executeUpdate();
@@ -47,7 +47,7 @@ public class H2CarCompDAO implements CarDAO {
         companies = new ArrayList<>();
         String select = "SELECT * FROM company ORDER BY id";
         try {
-            conn = DriverManager.getConnection(DB_URL);
+            //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(select);
 
             ResultSet query =  prepStmt.executeQuery();
