@@ -2,6 +2,7 @@ package carsharing;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Main {
     static CarDAO dao;
@@ -60,21 +61,21 @@ public class Main {
         }
     }
     public static void companyMenu() {
-        while(true) {
-            List<CarCompany> companies = dao.getAllCompanies();
+        List<CarCompany> companies = dao.getAllCompanies();
 
-            if (companies.isEmpty()) {
-                System.out.println("The company list is empty!");
-                break;
-            } else {
-                System.out.println("Choose the Company:");
-                companies.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
-            }
+        if (companies.isEmpty()) {
+            System.out.println("The company list is empty!");
+        } else {
+            System.out.println("Choose the Company:");
+            companies.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
+            System.out.println("0. Back");
+
             int selection = Integer.parseInt(input.nextLine());
-            company = companies.get(selection - 1);
-
-
-            System.out.println();
+            if (selection >= 1) {
+                company = companies.get(selection - 1);
+                carMenu();
+                System.out.println();
+            }
         }
     }
     public static void carMenu() {
@@ -86,7 +87,7 @@ public class Main {
             String choice = input.nextLine();
             switch (choice.charAt(0)) {
                 case ('1'):
-
+                    carList();
                     break;
                 case ('2'):
                     addCar();
@@ -97,12 +98,23 @@ public class Main {
                     System.out.println("Not a valid option");
                     break;
             }
-
         }
-
     }
+    public static void carList() {
+        List<Car> carList = dao.getAllCars(company.getId());
 
-
+        if (carList.isEmpty()) {
+            System.out.println("The car list is empty!");
+        } else {
+            System.out.println("Car list:");
+            AtomicInteger counter = new AtomicInteger();
+            carList.forEach(car -> {
+                counter.getAndIncrement();
+                System.out.printf("%s. %s \n", counter, car.getName());
+            });
+        }
+        System.out.println();
+    }
     public static void addCarCompany() {
         System.out.println("Enter the company name:");
         String choice = input.nextLine();

@@ -21,20 +21,22 @@ public class H2CarCompDAO implements CarDAO {
             conn = DriverManager.getConnection(DB_URL);
             conn.setAutoCommit(true);
             stmt = conn.createStatement();
-            String drop = "DROP TABLE IF EXISTS company";
+
+            String drop = "DROP TABLE IF EXISTS car";
+            stmt.execute(drop);
+            drop = "DROP TABLE IF EXISTS company";
+            stmt.execute(drop);
+
             String sql = "CREATE TABLE company (" +
                     "ID INT PRIMARY KEY AUTO_INCREMENT, " +
                     " NAME VARCHAR(30) NOT NULL UNIQUE)";
-            stmt.execute(drop);
             stmt.execute(sql);
-            drop = "DROP TABLE IF EXISTS car";
             sql = "CREATE TABLE car (" +
                     "ID INT PRIMARY KEY AUTO_INCREMENT," +
                     "NAME VARCHAR(30) NOT NULL UNIQUE," +
                     "COMPANY_ID INT NOT NULL," +
                     "CONSTRAINT fk_companyID FOREIGN KEY (COMPANY_ID)" +
                     "REFERENCES company(ID))";
-            stmt.execute(drop);
             stmt.execute(sql);
         } catch (Exception e) {
             e.printStackTrace();
@@ -54,7 +56,7 @@ public class H2CarCompDAO implements CarDAO {
     }
     @Override
     public void addCar(String name, int companyId) {
-        String insert = "INSERT INTO car (name) VALUES (?, ?)";
+        String insert = "INSERT INTO car (name, company_id) VALUES (?, ?)";
         try {
             //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(insert);
