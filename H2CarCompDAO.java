@@ -12,6 +12,7 @@ public class H2CarCompDAO implements CarDAO {
     Statement stmt = null;
     PreparedStatement prepStmt = null;
     List<CarCompany> companies;
+    List<Car> cars;
 
     public H2CarCompDAO(String dataSource) {
         DB_URL += dataSource;
@@ -26,6 +27,15 @@ public class H2CarCompDAO implements CarDAO {
                     " NAME VARCHAR(30) NOT NULL UNIQUE)";
             stmt.execute(drop);
             stmt.execute(sql);
+            drop = "DROP TABLE IF EXISTS car";
+            sql = "CREATE TABLE car (" +
+                    "ID INT PRIMARY KEY AUTO_INCREMENT," +
+                    "NAME VARCHAR(30) NOT NULL UNIQUE," +
+                    "COMPANY_ID INT NOT NULL," +
+                    "CONSTRAINT fk_companyID FOREIGN KEY (COMPANY_ID)" +
+                    "REFERENCES company(ID))";
+            stmt.execute(drop);
+            stmt.execute(sql);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -37,6 +47,19 @@ public class H2CarCompDAO implements CarDAO {
             //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
+            prepStmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void addCar(String name, int companyId) {
+        String insert = "INSERT INTO car (name) VALUES (?, ?)";
+        try {
+            //conn = DriverManager.getConnection(DB_URL);
+            prepStmt = conn.prepareStatement(insert);
+            prepStmt.setString(1, name);
+            prepStmt.setInt(2, companyId);
             prepStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,4 +85,26 @@ public class H2CarCompDAO implements CarDAO {
         }
         return companies;
     }
+    @Override
+    public List<Car> getAllCars(int currentCompanyId) {
+        cars = new ArrayList<>();
+        String select = "SELECT * FROM car WHERE company_id = ? ORDER BY id";
+        try {
+            //conn = DriverManager.getConnection(DB_URL);
+            prepStmt = conn.prepareStatement(select);
+            prepStmt.setInt(1, currentCompanyId);
+            ResultSet query =  prepStmt.executeQuery();
+            while (query.next()) {
+                int id = query.getInt("id");
+                String name = query.getString("name");
+                int companyID = query.getInt("company_id");
+                Car currentCar = new Car(id, name, companyID);
+                cars.add(currentCar);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cars;
+    }
+
 }
