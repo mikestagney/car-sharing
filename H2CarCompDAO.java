@@ -46,7 +46,6 @@ public class H2CarCompDAO implements CarDAO {
     public void addCompany(String name) {
         String insert = "INSERT INTO company (name) VALUES (?)";
         try {
-            //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
             prepStmt.executeUpdate();
@@ -58,7 +57,6 @@ public class H2CarCompDAO implements CarDAO {
     public void addCar(String name, int companyId) {
         String insert = "INSERT INTO car (name, company_id) VALUES (?, ?)";
         try {
-            //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
             prepStmt.setInt(2, companyId);
@@ -72,7 +70,6 @@ public class H2CarCompDAO implements CarDAO {
         companies = new ArrayList<>();
         String select = "SELECT * FROM company ORDER BY id";
         try {
-            //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(select);
 
             ResultSet query =  prepStmt.executeQuery();
@@ -92,7 +89,6 @@ public class H2CarCompDAO implements CarDAO {
         cars = new ArrayList<>();
         String select = "SELECT * FROM car WHERE company_id = ? ORDER BY id";
         try {
-            //conn = DriverManager.getConnection(DB_URL);
             prepStmt = conn.prepareStatement(select);
             prepStmt.setInt(1, currentCompanyId);
             ResultSet query =  prepStmt.executeQuery();
@@ -108,5 +104,13 @@ public class H2CarCompDAO implements CarDAO {
         }
         return cars;
     }
-
+    public void closeAndExit() {
+        try {
+            stmt.close();
+            conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
+    }
 }

@@ -8,5 +8,6 @@ public interface CarDAO {
     public void addCar(String name, int companyId);
     public List<CarCompany> getAllCompanies();
     public List<Car> getAllCars(int currentCompanyId);
+    public void closeAndExit();
 
 }

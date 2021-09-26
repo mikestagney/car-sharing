@@ -31,7 +31,7 @@ public class Main {
                     managerMenu();
                     break;
                 case ('0'):
-                    System.exit(0);
+                    dao.closeAndExit();
                     break;
                 default:
                     System.out.println("Not a valid option");
