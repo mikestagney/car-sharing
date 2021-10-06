@@ -33,6 +33,9 @@ public class Main {
                 case ('1'):
                     managerMenu();
                     break;
+                case ('2'):
+                    customerList();
+                    break;
                 case ('3'):
                     addCustomer();
                     break;
@@ -66,7 +69,7 @@ public class Main {
             }
         }
     }
-    public static void customerMenu() {
+    public static void customerList() {
         List<Customer> customers = dao.getAllCustomers();
 
         if (customers.isEmpty()) {
@@ -79,7 +82,7 @@ public class Main {
             int selection = Integer.parseInt(input.nextLine());
             if (selection >= 1) {
                 customer = customers.get(selection - 1);
-                // carMenu(); need to
+                // customerMenu(); need to implement
                 System.out.println();
             }
         }
