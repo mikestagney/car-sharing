@@ -23,12 +23,17 @@ public class Main {
     public static void mainMenu() {
         while (true) {
             System.out.println("1. Log in as a manager");
+            System.out.println("2. Log in as a customer");
+            System.out.println("3. Create a customer");
             System.out.println("0. Exit");
             String choice = input.nextLine();
 
             switch (choice.charAt(0)) {
                 case ('1'):
                     managerMenu();
+                    break;
+                case ('3'):
+                    addCustomer();
                     break;
                 case ('0'):
                     dao.closeAndExit();
@@ -128,5 +133,13 @@ public class Main {
             dao.addCar(choice, company.getId());
             System.out.println("The car was added!");
             System.out.println();
+    }
+    public static void addCustomer() {
+        System.out.println("Enter the customer name:");
+        String choice = input.nextLine();
+        dao.addCustomer(choice);
+        System.out.println("The customer was added!");
+        System.out.println();
+
     }
 }

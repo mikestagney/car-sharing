@@ -22,7 +22,9 @@ public class H2CarCompDAO implements CarDAO {
             conn.setAutoCommit(true);
             stmt = conn.createStatement();
 
-            String drop = "DROP TABLE IF EXISTS car";
+            String drop = "DROP TABLE IF EXISTS customer";
+            stmt.execute(drop);
+            drop = "DROP TABLE IF EXISTS car";
             stmt.execute(drop);
             drop = "DROP TABLE IF EXISTS company";
             stmt.execute(drop);
@@ -38,6 +40,14 @@ public class H2CarCompDAO implements CarDAO {
                     "CONSTRAINT fk_companyID FOREIGN KEY (COMPANY_ID)" +
                     "REFERENCES company(ID))";
             stmt.execute(sql);
+            sql = "CREATE TABLE customer (" +
+                    "ID INT PRIMARY KEY AUTO_INCREMENT," +
+                    "NAME VARCHAR(30) NOT NULL UNIQUE," +
+                    "RENTED_CAR_ID INT," +
+                    "CONSTRAINT fk_carRentedID FOREIGN KEY (RENTED_CAR_ID)" +
+                    "REFERENCES car(ID))";
+            stmt.execute(sql);
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -60,6 +70,17 @@ public class H2CarCompDAO implements CarDAO {
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
             prepStmt.setInt(2, companyId);
+            prepStmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void addCustomer(String name) {
+        String insert = "INSERT INTO customer (name) VALUES (?)";
+        try {
+            prepStmt = conn.prepareStatement(insert);
+            prepStmt.setString(1, name);
             prepStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
