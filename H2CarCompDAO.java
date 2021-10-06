@@ -13,6 +13,7 @@ public class H2CarCompDAO implements CarDAO {
     PreparedStatement prepStmt = null;
     List<CarCompany> companies;
     List<Car> cars;
+    List<Customer> customers;
 
     public H2CarCompDAO(String dataSource) {
         DB_URL += dataSource;
@@ -124,6 +125,25 @@ public class H2CarCompDAO implements CarDAO {
             e.printStackTrace();
         }
         return cars;
+    }
+    @Override
+    public List<Customer> getAllCustomers() {
+        customers = new ArrayList<>();
+        String select = "SELECT * FROM customer";
+        try {
+            prepStmt = conn.prepareStatement(select);
+            ResultSet query =  prepStmt.executeQuery();
+            while (query.next()) {
+                int id = query.getInt("id");
+                String name = query.getString("name");
+                Integer carRentalId = query.getInt("rented_car_id");
+                Customer currentCustomers = new Customer(id, name, carRentalId);
+                customers.add(currentCustomers);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return customers;
     }
     public void closeAndExit() {
         try {

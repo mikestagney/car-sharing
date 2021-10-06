@@ -8,6 +8,7 @@ public class Main {
     static CarDAO dao;
     static Scanner input;
     static CarCompany company;
+    static Customer customer;
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
@@ -62,6 +63,24 @@ public class Main {
                 default:
                     System.out.println("Not a valid option");
                     break;
+            }
+        }
+    }
+    public static void customerMenu() {
+        List<Customer> customers = dao.getAllCustomers();
+
+        if (customers.isEmpty()) {
+            System.out.println("The customer list is empty!");
+        } else {
+            System.out.println("Customer list:");
+            customers.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
+            System.out.println("0. Back");
+
+            int selection = Integer.parseInt(input.nextLine());
+            if (selection >= 1) {
+                customer = customers.get(selection - 1);
+                // carMenu(); need to
+                System.out.println();
             }
         }
     }
@@ -140,6 +159,5 @@ public class Main {
         dao.addCustomer(choice);
         System.out.println("The customer was added!");
         System.out.println();
-
     }
 }
