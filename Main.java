@@ -82,11 +82,35 @@ public class Main {
             int selection = Integer.parseInt(input.nextLine());
             if (selection >= 1) {
                 customer = customers.get(selection - 1);
-                // customerMenu(); need to implement
+                customerMenu();
                 System.out.println();
             }
         }
     }
+    public static void customerMenu() {
+        System.out.println("1. Rent a car");
+        System.out.println("2. Return a rented car");
+        System.out.println("3. My rented car");
+        System.out.println("0. Back");
+        String choice = input.nextLine();
+        switch (choice.charAt(0)) {
+            case ('1'):
+                companyMenu();
+                break;
+            case ('2'):
+                addCarCompany();
+                break;
+            case ('3'):
+
+                return;
+            case ('0'):
+                return;
+            default:
+                System.out.println("Not a valid option");
+                break;
+        }
+    }
+
     public static void companyMenu() {
         List<CarCompany> companies = dao.getAllCompanies();
 
