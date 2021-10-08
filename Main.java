@@ -3,12 +3,14 @@ package carsharing;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 public class Main {
     static CarDAO dao;
     static Scanner input;
     static CarCompany company;
     static Customer customer;
+    static List<Customer> customersList;
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
@@ -70,47 +72,70 @@ public class Main {
         }
     }
     public static void customerList() {
-        List<Customer> customers = dao.getAllCustomers();
+        customersList = dao.getAllCustomers();
 
-        if (customers.isEmpty()) {
+        if (customersList.isEmpty()) {
             System.out.println("The customer list is empty!");
         } else {
             System.out.println("Customer list:");
-            customers.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
+            customersList.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
             System.out.println("0. Back");
 
             int selection = Integer.parseInt(input.nextLine());
             if (selection >= 1) {
-                customer = customers.get(selection - 1);
+                customer = customersList.get(selection - 1);
                 customerMenu();
                 System.out.println();
             }
         }
     }
     public static void customerMenu() {
-        System.out.println("1. Rent a car");
-        System.out.println("2. Return a rented car");
-        System.out.println("3. My rented car");
-        System.out.println("0. Back");
-        String choice = input.nextLine();
-        switch (choice.charAt(0)) {
-            case ('1'):
-                companyMenu();
-                break;
-            case ('2'):
-                addCarCompany();
-                break;
-            case ('3'):
-
-                return;
-            case ('0'):
-                return;
-            default:
-                System.out.println("Not a valid option");
-                break;
+        while (true) {
+            System.out.println("1. Rent a car");
+            System.out.println("2. Return a rented car");
+            System.out.println("3. My rented car");
+            System.out.println("0. Back");
+            String choice = input.nextLine();
+            switch (choice.charAt(0)) {
+                case ('1'):
+                    rentCar();
+                    break;
+                case ('2'):
+                    returnCar();
+                    break;
+                case ('3'):
+                    displayCar();
+                case ('0'):
+                    return;
+                default:
+                    System.out.println("Not a valid option");
+                    break;
+            }
         }
     }
+    public static void rentCar() {
+        companyMenu();
+        List<Car> cars = dao.getAllCars(company.getId());
+        // create Set<> of customers rentalID's
+        // need to filter out cars that are rented
 
+
+    }
+    public static void returnCar() {
+
+    }
+    public static void displayCar() {
+        Integer carId = customer.getId();
+
+        if (carId == null) {
+            System.out.println("You didn't rent a car!");
+        } else {
+
+
+        }
+
+
+    }
     public static void companyMenu() {
         List<CarCompany> companies = dao.getAllCompanies();
 
