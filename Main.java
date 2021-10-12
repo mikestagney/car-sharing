@@ -11,6 +11,7 @@ public class Main {
     static CarCompany company;
     static Customer customer;
     static List<Customer> customersList;
+    static boolean loggedInAsManager;
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
@@ -21,6 +22,7 @@ public class Main {
             }
         }
         dao = new H2CarCompDAO(filename);
+        loggedInAsManager = false;
         mainMenu();
     }
     public static void mainMenu() {
@@ -51,6 +53,7 @@ public class Main {
         }
     }
     public static void managerMenu() {
+        loggedInAsManager = true;
         while (true) {
             System.out.println("1. Company list");
             System.out.println("2. Create a company");
@@ -64,6 +67,7 @@ public class Main {
                     addCarCompany();
                     break;
                 case ('0'):
+                    loggedInAsManager = false;
                     return;
                 default:
                     System.out.println("Not a valid option");
@@ -149,7 +153,9 @@ public class Main {
             int selection = Integer.parseInt(input.nextLine());
             if (selection >= 1) {
                 company = companies.get(selection - 1);
-                carMenu();
+                if (loggedInAsManager) {
+                    carMenu();
+                }
                 System.out.println();
             }
         }
