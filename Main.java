@@ -2,6 +2,7 @@ package carsharing;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ public class Main {
     static Scanner input;
     static CarCompany company;
     static Customer customer;
+    static Car carRented;
     static List<Customer> customersList;
     static boolean loggedInAsManager;
 
@@ -119,9 +121,36 @@ public class Main {
     }
     public static void rentCar() {
         companyMenu();
-        List<Car> cars = dao.getAllCars(company.getId());
-        // create Set<> of customers rentalID's
-        // need to filter out cars that are rented
+        List<Car> carsCompany = dao.getAllCars(company.getId());
+        Set<Integer> rentalIdList = customersList
+                .stream()
+                .map(Customer::getRentedCarId)
+                .collect(Collectors.toSet());
+        List<Car> carsAvailable = carsCompany
+                .stream()
+                .filter(car -> !rentalIdList.contains(car.getId()))
+                .collect(Collectors.toList());
+        if (carsAvailable.isEmpty()) {
+            System.out.printf("No available cars in the %s company\n", company.getName());
+        } else {
+            System.out.print("Choose a car:\n");
+            AtomicInteger counter = new AtomicInteger();
+                carsAvailable.forEach(car -> {
+                    counter.getAndIncrement();
+                    System.out.printf(" %s. %s\n", counter, car.getName());
+                });
+            System.out.print("0. Exit\n");
+            int selection = Integer.parseInt(input.nextLine());
+            if (selection >= 1) {
+                carRented = carsAvailable.get(selection - 1);
+                dao.rentCar(customer, carRented.getId());
+                System.out.printf("You rented %s\n", carRented.getName());
+                System.out.println();
+            }
+
+
+        }
+
 
 
     }
