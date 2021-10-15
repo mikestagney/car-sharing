@@ -78,10 +78,23 @@ public class H2CarCompDAO implements CarDAO {
     }
     @Override
     public void rentCar(Customer customer, int companyId) {
-        String insert = "UPDATE customer SET rented_car_id = ? WHERE id = ?";  // check syntax
+        String insert = "UPDATE customer SET rented_car_id = ? WHERE id = ?";
         try {
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setInt(1, companyId);
+            prepStmt.setInt(2, customer.getId());
+            prepStmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void returnCar(Customer customer, int companyId) {
+        String insert = "UPDATE customer SET rented_car_id = ? WHERE id = ?";
+        Integer removeId = null;
+        try {
+            prepStmt = conn.prepareStatement(insert);
+            prepStmt.setInt(1, removeId);
             prepStmt.setInt(2, customer.getId());
             prepStmt.executeUpdate();
         } catch (Exception e) {
@@ -137,6 +150,24 @@ public class H2CarCompDAO implements CarDAO {
             e.printStackTrace();
         }
         return cars;
+    }
+    @Override
+    public Car getCar(int CarId) {
+        Car car;
+        String select = "SELECT * FROM car WHERE id = ?";
+        try {
+            prepStmt = conn.prepareStatement(select);
+            prepStmt.setInt(1, CarId);
+            ResultSet query =  prepStmt.executeQuery();
+            int id = query.getInt("id");
+            String name = query.getString("name");
+            int companyID = query.getInt("company_id");
+            car = new Car(id, name, companyID);
+        } catch (Exception e) {
+            e.printStackTrace();
+            car = null;
+        }
+        return car;
     }
     @Override
     public List<Customer> getAllCustomers() {

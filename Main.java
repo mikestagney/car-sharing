@@ -120,45 +120,52 @@ public class Main {
         }
     }
     public static void rentCar() {
-        companyMenu();
-        List<Car> carsCompany = dao.getAllCars(company.getId());
-        Set<Integer> rentalIdList = customersList
-                .stream()
-                .map(Customer::getRentedCarId)
-                .collect(Collectors.toSet());
-        List<Car> carsAvailable = carsCompany
-                .stream()
-                .filter(car -> !rentalIdList.contains(car.getId()))
-                .collect(Collectors.toList());
-        if (carsAvailable.isEmpty()) {
-            System.out.printf("No available cars in the %s company\n", company.getName());
+        if (customer.getRentedCarId() != null) {
+            System.out.println("You've already rented a car!");
         } else {
-            System.out.print("Choose a car:\n");
-            AtomicInteger counter = new AtomicInteger();
+            companyMenu();
+            List<Car> carsCompany = dao.getAllCars(company.getId());
+            Set<Integer> rentalIdList = customersList
+                    .stream()
+                    .map(Customer::getRentedCarId)
+                    .collect(Collectors.toSet());
+            List<Car> carsAvailable = carsCompany
+                    .stream()
+                    .filter(car -> !rentalIdList.contains(car.getId()))
+                    .collect(Collectors.toList());
+            if (carsAvailable.isEmpty()) {
+                System.out.printf("No available cars in the %s company\n", company.getName());
+            } else {
+                System.out.print("Choose a car:\n");
+                AtomicInteger counter = new AtomicInteger();
                 carsAvailable.forEach(car -> {
                     counter.getAndIncrement();
                     System.out.printf(" %s. %s\n", counter, car.getName());
                 });
-            System.out.print("0. Exit\n");
-            int selection = Integer.parseInt(input.nextLine());
-            if (selection >= 1) {
-                carRented = carsAvailable.get(selection - 1);
-                dao.rentCar(customer, carRented.getId());
-                System.out.printf("You rented %s\n", carRented.getName());
-                System.out.println();
+                System.out.print("0. Exit\n");
+                int selection = Integer.parseInt(input.nextLine());
+                if (selection >= 1) {
+                    carRented = carsAvailable.get(selection - 1);
+                    dao.rentCar(customer, carRented.getId());
+                    System.out.printf("You rented %s\n", carRented.getName());
+
+                }
             }
-
-
         }
-
-
-
+        System.out.println();
     }
     public static void returnCar() {
-
+        Integer rentedCarId = customer.getRentedCarId();
+        if (rentedCarId == null) {
+            System.out.println("You didn't rent a car!");
+        } else {
+            dao.returnCar(customer, customer.getRentedCarId());
+            System.out.println("You've returned a rented car!");
+        }
+        System.out.println();
     }
     public static void displayCar() {
-        Integer carId = customer.getId();
+        Integer carId = customer.getRentedCarId();
 
         if (carId == null) {
             System.out.println("You didn't rent a car!");
