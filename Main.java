@@ -120,6 +120,7 @@ public class Main {
         }
     }
     public static void rentCar() {
+        System.out.println(customer.getRentedCarId() + " car id" );
         if (customer.getRentedCarId() != null) {
             System.out.println("You've already rented a car!");
         } else {

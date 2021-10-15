@@ -48,6 +48,8 @@ public class H2CarCompDAO implements CarDAO {
                     "CONSTRAINT fk_carRentedID FOREIGN KEY (RENTED_CAR_ID)" +
                     "REFERENCES car(ID))";
             stmt.execute(sql);
+            String alterNull = "ALTER TABLE customer ALTER COLUMN rented_car_id SET NULL";
+            stmt.execute(alterNull);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,8 +106,14 @@ public class H2CarCompDAO implements CarDAO {
     @Override
     public void addCustomer(String name) {
         String insert = "INSERT INTO customer (name) VALUES (?)";
+        String nullRentalID = "Update customer SET rented_car_id = null WHERE name = ?";
+        // , rented_car_id
+        Integer carId = null;
         try {
             prepStmt = conn.prepareStatement(insert);
+            prepStmt.setString(1, name);
+            prepStmt.executeUpdate();
+            prepStmt = conn.prepareStatement(nullRentalID);
             prepStmt.setString(1, name);
             prepStmt.executeUpdate();
         } catch (Exception e) {
