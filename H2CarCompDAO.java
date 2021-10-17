@@ -44,12 +44,12 @@ public class H2CarCompDAO implements CarDAO {
             sql = "CREATE TABLE customer (" +
                     "ID INT PRIMARY KEY AUTO_INCREMENT," +
                     "NAME VARCHAR(30) NOT NULL UNIQUE," +
-                    "RENTED_CAR_ID INT," +
+                    "RENTED_CAR_ID INT DEFAULT NULL," +
                     "CONSTRAINT fk_carRentedID FOREIGN KEY (RENTED_CAR_ID)" +
                     "REFERENCES car(ID))";
             stmt.execute(sql);
-            String alterNull = "ALTER TABLE customer ALTER COLUMN rented_car_id SET NULL";
-            stmt.execute(alterNull);
+            // String alterNull = "ALTER TABLE customer ALTER COLUMN rented_car_id SET NULL";
+            // stmt.execute(alterNull);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,12 +92,12 @@ public class H2CarCompDAO implements CarDAO {
     }
     @Override
     public void returnCar(Customer customer, int companyId) {
-        String insert = "UPDATE customer SET rented_car_id = ? WHERE id = ?";
-        Integer removeId = null;
+        String insert = "UPDATE customer SET rented_car_id = null WHERE id = ?";
+        // Integer removeId = null;
         try {
             prepStmt = conn.prepareStatement(insert);
-            prepStmt.setInt(1, removeId);
-            prepStmt.setInt(2, customer.getId());
+            //prepStmt.setInt(1, removeId);
+            prepStmt.setInt(1, customer.getId());
             prepStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -106,16 +106,17 @@ public class H2CarCompDAO implements CarDAO {
     @Override
     public void addCustomer(String name) {
         String insert = "INSERT INTO customer (name) VALUES (?)";
-        String nullRentalID = "Update customer SET rented_car_id = null WHERE name = ?";
+        //String nullRentalID = "Update customer SET rented_car_id = null WHERE name = ?";
         // , rented_car_id
-        Integer carId = null;
+        //Integer carId = null;
         try {
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
+
             prepStmt.executeUpdate();
-            prepStmt = conn.prepareStatement(nullRentalID);
-            prepStmt.setString(1, name);
-            prepStmt.executeUpdate();
+            //prepStmt = conn.prepareStatement(nullRentalID);
+            //prepStmt.setString(1, name);
+            //prepStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -180,14 +181,14 @@ public class H2CarCompDAO implements CarDAO {
     @Override
     public List<Customer> getAllCustomers() {
         customers = new ArrayList<>();
-        String select = "SELECT * FROM customer";
+        String select = "SELECT * FROM customer ORDER BY ID";
         try {
             prepStmt = conn.prepareStatement(select);
             ResultSet query =  prepStmt.executeQuery();
             while (query.next()) {
                 int id = query.getInt("id");
                 String name = query.getString("name");
-                Integer carRentalId = query.getInt("rented_car_id");
+                Integer carRentalId = (Integer) query.getObject("rented_car_id");
                 Customer currentCustomers = new Customer(id, name, carRentalId);
                 customers.add(currentCustomers);
             }

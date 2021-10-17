@@ -134,3 +134,12 @@ Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The connection wa
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:622)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
 	... 25 more
+2021-10-16 19:50:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-16 19:50:26 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-16 19:50:26 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]

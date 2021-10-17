@@ -111,6 +111,7 @@ public class Main {
                     break;
                 case ('3'):
                     displayCar();
+                    break;
                 case ('0'):
                     return;
                 default:
@@ -120,7 +121,7 @@ public class Main {
         }
     }
     public static void rentCar() {
-        System.out.println(customer.getRentedCarId() + " car id" );
+        // System.out.println(customer.getRentedCarId() + " car id" );
         if (customer.getRentedCarId() != null) {
             System.out.println("You've already rented a car!");
         } else {
@@ -141,15 +142,15 @@ public class Main {
                 AtomicInteger counter = new AtomicInteger();
                 carsAvailable.forEach(car -> {
                     counter.getAndIncrement();
-                    System.out.printf(" %s. %s\n", counter, car.getName());
+                    System.out.printf("%s. %s\n", counter, car.getName());
                 });
                 System.out.print("0. Exit\n");
                 int selection = Integer.parseInt(input.nextLine());
                 if (selection >= 1) {
                     carRented = carsAvailable.get(selection - 1);
                     dao.rentCar(customer, carRented.getId());
+                    customer.setRentedCarId(carRented.getId());
                     System.out.printf("You rented %s\n", carRented.getName());
-
                 }
             }
         }
@@ -161,6 +162,7 @@ public class Main {
             System.out.println("You didn't rent a car!");
         } else {
             dao.returnCar(customer, customer.getRentedCarId());
+            customer.setRentedCarId(null);
             System.out.println("You've returned a rented car!");
         }
         System.out.println();
@@ -171,8 +173,10 @@ public class Main {
         if (carId == null) {
             System.out.println("You didn't rent a car!");
         } else {
-
-
+            System.out.println("Your rented car:");
+            System.out.println(carRented.getName());
+            System.out.println("Company:");
+            System.out.println(company.getName());
         }
 
 
