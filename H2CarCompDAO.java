@@ -22,14 +22,14 @@ public class H2CarCompDAO implements CarDAO {
             conn = DriverManager.getConnection(DB_URL);
             conn.setAutoCommit(true);
             stmt = conn.createStatement();
-
+            /*
             String drop = "DROP TABLE IF EXISTS customer";
             stmt.execute(drop);
             drop = "DROP TABLE IF EXISTS car";
             stmt.execute(drop);
             drop = "DROP TABLE IF EXISTS company";
             stmt.execute(drop);
-
+            */
             String sql = "CREATE TABLE company (" +
                     "ID INT PRIMARY KEY AUTO_INCREMENT, " +
                     " NAME VARCHAR(30) NOT NULL UNIQUE)";
@@ -48,8 +48,6 @@ public class H2CarCompDAO implements CarDAO {
                     "CONSTRAINT fk_carRentedID FOREIGN KEY (RENTED_CAR_ID)" +
                     "REFERENCES car(ID))";
             stmt.execute(sql);
-            // String alterNull = "ALTER TABLE customer ALTER COLUMN rented_car_id SET NULL";
-            // stmt.execute(alterNull);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -93,10 +91,8 @@ public class H2CarCompDAO implements CarDAO {
     @Override
     public void returnCar(Customer customer, int companyId) {
         String insert = "UPDATE customer SET rented_car_id = null WHERE id = ?";
-        // Integer removeId = null;
         try {
             prepStmt = conn.prepareStatement(insert);
-            //prepStmt.setInt(1, removeId);
             prepStmt.setInt(1, customer.getId());
             prepStmt.executeUpdate();
         } catch (Exception e) {
@@ -106,17 +102,11 @@ public class H2CarCompDAO implements CarDAO {
     @Override
     public void addCustomer(String name) {
         String insert = "INSERT INTO customer (name) VALUES (?)";
-        //String nullRentalID = "Update customer SET rented_car_id = null WHERE name = ?";
-        // , rented_car_id
-        //Integer carId = null;
+
         try {
             prepStmt = conn.prepareStatement(insert);
             prepStmt.setString(1, name);
-
             prepStmt.executeUpdate();
-            //prepStmt = conn.prepareStatement(nullRentalID);
-            //prepStmt.setString(1, name);
-            //prepStmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

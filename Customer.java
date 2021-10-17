@@ -11,12 +11,6 @@ public class Customer {
         this.name = name;
         this.rentedCarId = rentedCarId;
     }
-    /*
-    Customer(String name) {
-        this.name = name;
-        rentedCarId = null;
-    }*/
-
     public int getId() {
         return id;
     }

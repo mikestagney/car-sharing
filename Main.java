@@ -84,7 +84,11 @@ public class Main {
             System.out.println("The customer list is empty!");
         } else {
             System.out.println("Customer list:");
-            customersList.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
+            AtomicInteger counter = new AtomicInteger();
+            customersList.forEach(com -> {
+                counter.getAndIncrement();
+                System.out.printf("%s. %s \n", counter, com.getName());
+            });
             System.out.println("0. Back");
 
             int selection = Integer.parseInt(input.nextLine());
@@ -121,7 +125,6 @@ public class Main {
         }
     }
     public static void rentCar() {
-        // System.out.println(customer.getRentedCarId() + " car id" );
         if (customer.getRentedCarId() != null) {
             System.out.println("You've already rented a car!");
         } else {
@@ -150,7 +153,7 @@ public class Main {
                     carRented = carsAvailable.get(selection - 1);
                     dao.rentCar(customer, carRented.getId());
                     customer.setRentedCarId(carRented.getId());
-                    System.out.printf("You rented %s\n", carRented.getName());
+                    System.out.printf("You rented '%s'\n", carRented.getName());
                 }
             }
         }
@@ -178,8 +181,6 @@ public class Main {
             System.out.println("Company:");
             System.out.println(company.getName());
         }
-
-
     }
     public static void companyMenu() {
         List<CarCompany> companies = dao.getAllCompanies();
@@ -188,7 +189,11 @@ public class Main {
             System.out.println("The company list is empty!");
         } else {
             System.out.println("Choose the Company:");
-            companies.forEach(com -> System.out.printf("%d. %s \n", com.getId(), com.getName()));
+            AtomicInteger counter = new AtomicInteger();
+            companies.forEach(com -> {
+                    counter.getAndIncrement();
+                    System.out.printf("%s. %s \n", counter, com.getName());
+            });
             System.out.println("0. Back");
 
             int selection = Integer.parseInt(input.nextLine());
