@@ -70,29 +70,6 @@ public class H2CarCompDAO implements CarDAO {
         }
     }
     @Override
-    public void rentCar(Customer customer, int companyId) {
-        String insert = "UPDATE customer SET rented_car_id = ? WHERE id = ?";
-        try {
-            prepStmt = conn.prepareStatement(insert);
-            prepStmt.setInt(1, companyId);
-            prepStmt.setInt(2, customer.getId());
-            prepStmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
-    public void returnCar(Customer customer, int companyId) {
-        String insert = "UPDATE customer SET rented_car_id = null WHERE id = ?";
-        try {
-            prepStmt = conn.prepareStatement(insert);
-            prepStmt.setInt(1, customer.getId());
-            prepStmt.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    @Override
     public void addCustomer(String name) {
         String insert = "INSERT INTO customer (name) VALUES (?)";
 
@@ -161,6 +138,29 @@ public class H2CarCompDAO implements CarDAO {
             e.printStackTrace();
         }
         return customers;
+    }
+    @Override
+    public void rentCar(Customer customer, int companyId) {
+        String insert = "UPDATE customer SET rented_car_id = ? WHERE id = ?";
+        try {
+            prepStmt = conn.prepareStatement(insert);
+            prepStmt.setInt(1, companyId);
+            prepStmt.setInt(2, customer.getId());
+            prepStmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
+    public void returnCar(Customer customer, int companyId) {
+        String insert = "UPDATE customer SET rented_car_id = null WHERE id = ?";
+        try {
+            prepStmt = conn.prepareStatement(insert);
+            prepStmt.setInt(1, customer.getId());
+            prepStmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void closeAndExit() {
         try {

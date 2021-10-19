@@ -320,3 +320,93 @@ CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT N
 2021-10-18 21:52:32 jdbc[15]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
 CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:01:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:01:28 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:01:28 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:01:28 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:01:28 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:01:28 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:05:40 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:05:40 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:05:40 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:05:40 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:05:40 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:05:40 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:11:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:11:00 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:11:00 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:11:00 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:11:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:11:00 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:12:03 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:12:03 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:12:04 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:12:04 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:12:04 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:12:04 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:18:56 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:18:56 jdbc[7]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:18:56 jdbc[9]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:18:56 jdbc[11]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:18:56 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]
+2021-10-18 22:18:56 jdbc[15]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPANY" already exists; SQL statement:
+CREATE TABLE company (ID INT PRIMARY KEY AUTO_INCREMENT,  NAME VARCHAR(30) NOT NULL UNIQUE) [42101-200]

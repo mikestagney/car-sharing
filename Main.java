@@ -14,7 +14,6 @@ public class Main {
     static Car carRented;
     static List<Customer> customersList;
     static boolean loggedInAsManager;
-    static AtomicInteger counter;
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
@@ -78,21 +77,45 @@ public class Main {
             }
         }
     }
-    public static void customerList() {
-        customersList = dao.getAllCustomers();
+    public static void companyMenu() {
+        List<CarCompany> companies = dao.getAllCompanies();
 
-        if (customersList.isEmpty()) {
-            System.out.println("The customer list is empty!");
+        if (companies.isEmpty()) {
+            System.out.println("The company list is empty!");
         } else {
-            System.out.println("Customer list:");
-            printList(customersList);
+            System.out.println("Choose the Company:");
+            printList(companies);
             System.out.println("0. Back");
 
             int selection = Integer.parseInt(input.nextLine());
             if (selection >= 1) {
-                customer = customersList.get(selection - 1);
-                customerMenu();
+                company = companies.get(selection - 1);
+                if (loggedInAsManager) {
+                    carMenu();
+                }
                 System.out.println();
+            }
+        }
+    }
+    public static void carMenu() {
+        while (true) {
+            System.out.printf("'%s' company\n", company.getName());
+            System.out.println("1. Car list");
+            System.out.println("2. Create a car");
+            System.out.println("0. Back");
+            String choice = input.nextLine();
+            switch (choice.charAt(0)) {
+                case ('1'):
+                    carList();
+                    break;
+                case ('2'):
+                    addCar();
+                    break;
+                case ('0'):
+                    return;
+                default:
+                    System.out.println("Not a valid option");
+                    break;
             }
         }
     }
@@ -120,6 +143,35 @@ public class Main {
                     break;
             }
         }
+    }
+    public static void customerList() {
+        customersList = dao.getAllCustomers();
+
+        if (customersList.isEmpty()) {
+            System.out.println("The customer list is empty!");
+        } else {
+            System.out.println("Customer list:");
+            printList(customersList);
+            System.out.println("0. Back");
+
+            int selection = Integer.parseInt(input.nextLine());
+            if (selection >= 1) {
+                customer = customersList.get(selection - 1);
+                customerMenu();
+                System.out.println();
+            }
+        }
+    }
+    public static void carList() {
+        List<Car> carList = dao.getAllCars(company.getId());
+
+        if (carList.isEmpty()) {
+            System.out.println("The car list is empty!");
+        } else {
+            System.out.println("Car list:");
+            printList(carList);
+        }
+        System.out.println();
     }
     public static void rentCar() {
         if (customer.getRentedCarId() != null) {
@@ -176,61 +228,8 @@ public class Main {
             System.out.println(company.getName());
         }
     }
-    public static void companyMenu() {
-        List<CarCompany> companies = dao.getAllCompanies();
-
-        if (companies.isEmpty()) {
-            System.out.println("The company list is empty!");
-        } else {
-            System.out.println("Choose the Company:");
-            printList(companies);
-            System.out.println("0. Back");
-
-            int selection = Integer.parseInt(input.nextLine());
-            if (selection >= 1) {
-                company = companies.get(selection - 1);
-                if (loggedInAsManager) {
-                    carMenu();
-                }
-                System.out.println();
-            }
-        }
-    }
-    public static void carMenu() {
-        while (true) {
-            System.out.printf("'%s' company\n", company.getName());
-            System.out.println("1. Car list");
-            System.out.println("2. Create a car");
-            System.out.println("0. Back");
-            String choice = input.nextLine();
-            switch (choice.charAt(0)) {
-                case ('1'):
-                    carList();
-                    break;
-                case ('2'):
-                    addCar();
-                    break;
-                case ('0'):
-                    return;
-                default:
-                    System.out.println("Not a valid option");
-                    break;
-            }
-        }
-    }
-    public static void carList() {
-        List<Car> carList = dao.getAllCars(company.getId());
-
-        if (carList.isEmpty()) {
-            System.out.println("The car list is empty!");
-        } else {
-            System.out.println("Car list:");
-            printList(carList);
-        }
-        System.out.println();
-    }
     public static <T> void printList (List<T> list) {
-        counter = new AtomicInteger();
+        AtomicInteger counter = new AtomicInteger();
         list.forEach(obj -> {
             counter.getAndIncrement();
             System.out.printf("%s. %s \n", counter, obj.toString());
@@ -238,24 +237,25 @@ public class Main {
         System.out.println();
     }
     public static void addCarCompany() {
-        System.out.println("Enter the company name:");
-        String choice = input.nextLine();
+        String choice = getObjectName("company");
         dao.addCompany(choice);
         System.out.println("The company was created!");
         System.out.println();
     }
     public static void addCar() {
-            System.out.println("Enter the car name:");
-            String choice = input.nextLine();
-            dao.addCar(choice, company.getId());
-            System.out.println("The car was added!");
-            System.out.println();
+        String choice = getObjectName("car");
+        dao.addCar(choice, company.getId());
+        System.out.println("The car was added!");
+        System.out.println();
     }
     public static void addCustomer() {
-        System.out.println("Enter the customer name:");
-        String choice = input.nextLine();
+        String choice = getObjectName("customer");
         dao.addCustomer(choice);
         System.out.println("The customer was added!");
         System.out.println();
+    }
+    public static String getObjectName(String objectName) {
+        System.out.printf("Enter the %s name:\n", objectName);
+        return input.nextLine();
     }
 }
