@@ -218,7 +218,6 @@ public class Main {
     }
     public static void displayCar() {
         Integer carId = customer.getRentedCarId();
-
         if (carId == null) {
             System.out.println("You didn't rent a car!");
         } else {
@@ -237,25 +236,29 @@ public class Main {
         System.out.println();
     }
     public static void addCarCompany() {
-        String choice = getObjectName("company");
+        String objectName = "company";
+        String choice = getObjectName(objectName);
         dao.addCompany(choice);
-        System.out.println("The company was created!");
-        System.out.println();
+        printObjectAddition(objectName);
     }
     public static void addCar() {
-        String choice = getObjectName("car");
+        String objectName = "car";
+        String choice = getObjectName(objectName);
         dao.addCar(choice, company.getId());
-        System.out.println("The car was added!");
-        System.out.println();
+        printObjectAddition(objectName);
     }
     public static void addCustomer() {
-        String choice = getObjectName("customer");
+        String objectName = "customer";
+        String choice = getObjectName(objectName);
         dao.addCustomer(choice);
-        System.out.println("The customer was added!");
-        System.out.println();
+        printObjectAddition(objectName);
     }
     public static String getObjectName(String objectName) {
         System.out.printf("Enter the %s name:\n", objectName);
         return input.nextLine();
+    }
+    public static void printObjectAddition(String objectName) {
+        System.out.printf("The %s was added!\n", objectName);
+        System.out.println();
     }
 }
