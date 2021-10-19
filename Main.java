@@ -14,6 +14,7 @@ public class Main {
     static Car carRented;
     static List<Customer> customersList;
     static boolean loggedInAsManager;
+    static AtomicInteger counter;
 
     public static void main(String[] args) {
         input = new Scanner(System.in);
@@ -84,11 +85,7 @@ public class Main {
             System.out.println("The customer list is empty!");
         } else {
             System.out.println("Customer list:");
-            AtomicInteger counter = new AtomicInteger();
-            customersList.forEach(com -> {
-                counter.getAndIncrement();
-                System.out.printf("%s. %s \n", counter, com.getName());
-            });
+            printList(customersList);
             System.out.println("0. Back");
 
             int selection = Integer.parseInt(input.nextLine());
@@ -142,12 +139,9 @@ public class Main {
                 System.out.printf("No available cars in the %s company\n", company.getName());
             } else {
                 System.out.print("Choose a car:\n");
-                AtomicInteger counter = new AtomicInteger();
-                carsAvailable.forEach(car -> {
-                    counter.getAndIncrement();
-                    System.out.printf("%s. %s\n", counter, car.getName());
-                });
+                printList(carsAvailable);
                 System.out.print("0. Exit\n");
+
                 int selection = Integer.parseInt(input.nextLine());
                 if (selection >= 1) {
                     carRented = carsAvailable.get(selection - 1);
@@ -189,11 +183,7 @@ public class Main {
             System.out.println("The company list is empty!");
         } else {
             System.out.println("Choose the Company:");
-            AtomicInteger counter = new AtomicInteger();
-            companies.forEach(com -> {
-                    counter.getAndIncrement();
-                    System.out.printf("%s. %s \n", counter, com.getName());
-            });
+            printList(companies);
             System.out.println("0. Back");
 
             int selection = Integer.parseInt(input.nextLine());
@@ -235,12 +225,16 @@ public class Main {
             System.out.println("The car list is empty!");
         } else {
             System.out.println("Car list:");
-            AtomicInteger counter = new AtomicInteger();
-            carList.forEach(car -> {
-                counter.getAndIncrement();
-                System.out.printf("%s. %s \n", counter, car.getName());
-            });
+            printList(carList);
         }
+        System.out.println();
+    }
+    public static <T> void printList (List<T> list) {
+        counter = new AtomicInteger();
+        list.forEach(obj -> {
+            counter.getAndIncrement();
+            System.out.printf("%s. %s \n", counter, obj.toString());
+        });
         System.out.println();
     }
     public static void addCarCompany() {

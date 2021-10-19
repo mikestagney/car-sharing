@@ -35,4 +35,7 @@ public class Car {
     public void setCompanyId(int companyId) {
         this.companyId = companyId;
     }
+    public String toString() {
+        return name;
+    }
 }

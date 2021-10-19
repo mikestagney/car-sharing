@@ -34,4 +34,7 @@ public class Customer {
     public void setRentedCarId(Integer rentedCarId) {
         this.rentedCarId = rentedCarId;
     }
+    public String toString() {
+        return name;
+    }
 }

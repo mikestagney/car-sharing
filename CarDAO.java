@@ -6,7 +6,6 @@ public interface CarDAO {
 
     public void addCompany(String name);
     public void addCar(String name, int companyId);
-    public Car getCar(int CarId);
     public void rentCar(Customer customer, int companyId);
     public void returnCar(Customer customer, int companyId);
     public void addCustomer(String name);

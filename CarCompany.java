@@ -28,6 +28,8 @@ public class CarCompany {
         this.name = name;
     }
 
-
+    public String toString() {
+        return name;
+    }
 
 }
